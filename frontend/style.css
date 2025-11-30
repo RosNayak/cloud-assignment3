@@ -1,0 +1,13 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+#results img {
+  max-width: 200px;
+  margin: 10px;
+}

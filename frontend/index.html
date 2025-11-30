@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Photo Search</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Photo Search</h1>
+
+  <!-- Search section -->
+  <section>
+    <h2>Search photos</h2>
+    <input type="text" id="searchQuery" placeholder="e.g. car, tree" />
+    <button id="searchBtn">Search</button>
+  </section>
+
+  <!-- Upload section -->
+  <section>
+    <h2>Upload photo</h2>
+    <input type="file" id="photoFile" accept="image/*" />
+    <br><br>
+    <input type="text" id="customLabels" placeholder="Custom labels (comma separated)" />
+    <button id="uploadBtn">Upload</button>
+  </section>
+
+  <hr>
+
+  <!-- Results -->
+  <section>
+    <h2>Results</h2>
+    <div id="results"></div>
+  </section>
+
+  <!-- API Gateway SDK files -->
+  <script src="apiGateway-js-sdk/lib/axios/dist/axios.standalone.js"></script>
+  <script src="apiGateway-js-sdk/lib/url-template/url-template.js"></script>
+  <script src="apiGateway-js-sdk/lib/apiGatewayCore/sigV4Client.js"></script>
+  <script src="apiGateway-js-sdk/lib/apiGatewayCore/apiGatewayClient.js"></script>
+  <script src="apiGateway-js-sdk/lib/apiGatewayCore/utils.js"></script>
+  <script src="apiGateway-js-sdk/lib/apiGatewayCore/simpleHttpClient.js"></script>
+  <script src="apiGateway-js-sdk/apigClient.js"></script>
+
+  <!-- Your app logic -->
+  <script src="app.js"></script>
+</body>
+</html>

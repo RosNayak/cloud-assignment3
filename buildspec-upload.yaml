@@ -3,15 +3,18 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.9
+      python: 3.14   # or 3.9/3.11 – match your Lambda runtime
 
   build:
     commands:
       - echo "Packaging upload-photos Lambda"
+      - mkdir -p build
       - cd lambdas/upload-photos
-      - pip install -r requirements.txt -t .
-      - zip -r upload-photos.zip .
+      - if [ -f requirements.txt ]; then pip install -r requirements.txt -t .; fi
+      - zip -r ../../build/upload-photos.zip . -x '*.zip'
+      - cd ../../
 
 artifacts:
+  base-directory: build
   files:
-    - lambdas/upload-photos/upload-photos.zip
+    - upload-photos.zip

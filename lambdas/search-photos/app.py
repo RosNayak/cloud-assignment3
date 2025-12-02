@@ -169,13 +169,6 @@ def lambda_handler(event, context):
     results = search_photos_by_labels(keywords)
     print("Search results:", json.dumps(results))
 
-    # if not results:
-    #     return build_lex_response(
-    #         intent_name,
-    #         "Fulfilled",
-    #         "I couldn't find any photos matching your query."
-    #     )
-
     if not results:
         return {
             "statusCode": 200,

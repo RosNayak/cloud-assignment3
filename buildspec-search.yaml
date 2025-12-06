@@ -9,12 +9,12 @@ phases:
     commands:
       - echo "Packaging search-photos Lambda"
       - mkdir -p build
-      - cd lambdas/search-photos
+      - cd lambdas/search_photos
       - if [ -f requirements.txt ]; then pip install -r requirements.txt -t .; fi
-      - zip -r ../../build/search-photos.zip . -x '*.zip'
+      - zip -r ../../build/search_photos.zip . -x '*.zip'
       - cd ../../
 
 artifacts:
   base-directory: build
   files:
-    - search-photos.zip
+    - search_photos.zip

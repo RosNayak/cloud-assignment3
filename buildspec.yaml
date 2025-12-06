@@ -1,0 +1,36 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.14
+    commands:
+      - pip install --upgrade awscli
+
+  build:
+    commands:
+      - set -e
+      - ARTIFACT_DIR=${ARTIFACT_DIR:-artifacts}
+      - INDEX_ZIP="$ARTIFACT_DIR/index-photos.zip"
+      - SEARCH_ZIP="$ARTIFACT_DIR/search-photos.zip"
+      - INDEX_LAMBDA_NAME=${INDEX_LAMBDA_NAME:-index-photos-lf1}
+      - SEARCH_LAMBDA_NAME=${SEARCH_LAMBDA_NAME:-search-photos-l2}
+      - REGION=${AWS_REGION:-us-east-1}
+
+      - echo "Using artifacts from $ARTIFACT_DIR"
+      - mkdir -p "$ARTIFACT_DIR"
+      - if [ ! -f "$INDEX_ZIP" ] || [ ! -f "$SEARCH_ZIP" ]; then
+          echo "Zips not found in artifacts dir; rebuilding from source...";
+          (cd lambdas/index-photos && zip -r "../../$INDEX_ZIP" .);
+          (cd lambdas/search-photos && zip -r "../../$SEARCH_ZIP" .);
+        fi
+      - test -f "$INDEX_ZIP" && test -f "$SEARCH_ZIP"
+
+      - echo "Updating $INDEX_LAMBDA_NAME with $INDEX_ZIP"
+      - aws lambda update-function-code --function-name "$INDEX_LAMBDA_NAME" --zip-file fileb://"$INDEX_ZIP" --region "$REGION"
+
+      - echo "Updating $SEARCH_LAMBDA_NAME with $SEARCH_ZIP"
+      - aws lambda update-function-code --function-name "$SEARCH_LAMBDA_NAME" --zip-file fileb://"$SEARCH_ZIP" --region "$REGION"
+
+artifacts:
+  files: []

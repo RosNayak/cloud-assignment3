@@ -36,6 +36,7 @@ phases:
 
       # Verify zips exist
       - test -f "$INDEX_ZIP" && echo "✓ $INDEX_ZIP created"
+
       - test -f "$SEARCH_ZIP" && echo "✓ $SEARCH_ZIP created"
 
       # Deploy to Lambda

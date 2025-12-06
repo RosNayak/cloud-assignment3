@@ -13,23 +13,23 @@ phases:
       - ARTIFACT_DIR=${ARTIFACT_DIR:-artifacts}
       - INDEX_ZIP="$ARTIFACT_DIR/index-photos.zip"
       - SEARCH_ZIP="$ARTIFACT_DIR/search-photos.zip"
-      - INDEX_LAMBDA_NAME=${INDEX_LAMBDA_NAME:-cc-hw3-lf1-index-photos}
-      - SEARCH_LAMBDA_NAME=${SEARCH_LAMBDA_NAME:-cc-hw3-lf2-search-photos}
+      - INDEX_LAMBDA_NAME=${INDEX_LAMBDA_NAME:-index-photos-lf1}
+      - SEARCH_LAMBDA_NAME=${SEARCH_LAMBDA_NAME:-search-photos-l2}
       - REGION=${AWS_REGION:-us-east-1}
 
       - echo "Creating artifacts directory"
       - mkdir -p "$ARTIFACT_DIR"
       
       # Build index-photos Lambda
-      - echo "Building index-photos Lambda"
-      - cd lambdas/index-photos
+      - echo "Building upload_photos Lambda"
+      - cd lambdas/upload_photos
       - if [ -f requirements.txt ]; then pip install -r requirements.txt -t .; fi
       - zip -r "../../$INDEX_ZIP" . -x '*.pyc' '__pycache__/*' '*.git/*'
       - cd ../..
 
       # Build search-photos Lambda
-      - echo "Building search-photos Lambda"
-      - cd lambdas/search-photos
+      - echo "Building search_photos Lambda"
+      - cd lambdas/search_photos
       - if [ -f requirements.txt ]; then pip install -r requirements.txt -t .; fi
       - zip -r "../../$SEARCH_ZIP" . -x '*.pyc' '__pycache__/*' '*.git/*'
       - cd ../..
